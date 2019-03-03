@@ -3,27 +3,39 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
+	<title>Filtering Table</title>
+	<link rel="stylesheet" href="mycss.css">
+
+	
 </head>
 <body>
-
-<!-- <div id="jumlah"></div> -->
-<!-- <div id="nama"> -->
-	
-<!-- </div> --><!-- 
-<div id="diameter">
-	
-</div> -->
-
-<!-- <div id="planets">
-	
-</div>
- -->
- <input type="text">
- <input type="button" value="Search">
-	<table border="1" id="data">
+<h2>FILTERING TABLE</h2>
+ <div class="container">
+        
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Names..." title="Type In a Name">
+          <i class="fa fa-search" aria-hidden="true"></i>
+      </div> 
+   
+	<table id="data">
 		
+   <thead>
+   <tr class="header">
+      <th>Name</th>
+      <th>Rotation Period</th>
+      <th>Orbital Period</th>
+      <th>Diameter</th>
+      <th>Climate</th>
+      <th>Gravity</th>
+      <th>Terrain</th>
+      <th>Surface Water</th>
+      <th>Population</th>
+      <th>Residents</th>
+      <th>Created</th>
+      <th>Edited</th>
+      <th>URL</th>
+   </tr>
+   </thead>
+   
 	</table>
 
 
@@ -259,21 +271,14 @@
 		}
 
 		console.log(data);
-// 		var isi= ""
 
-// for(var x=0; x < data.results.length; x++) {
-//   console.log(data.results[x].name)
-//   isi +="<div>"+ data.results[x].name +"</div>"
-// }
-// document.getElementById('planets').innerHTML = isi
-		// document.getElementById('jumlah').textContent = data.count
-		// document.getElementById('nama').textContent= data.results[0].name
-		// document.getElementById('diameter').textContent= data.results[0].diameter
 
 		var table = document.getElementById("data");
 
 		for(var x=0; x < data.results.length; x++){
 			var row = table.insertRow(-1);
+
+
 
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
@@ -302,11 +307,29 @@
 			cell11.innerHTML = data.results[x].created;
 			cell12.innerHTML = data.results[x].edited;
 			cell13.innerHTML = data.results[x].url;
-			
-
 
 		}
 
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("data");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      	
+
+      tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
 
 	</script>
 </body>
